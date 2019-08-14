@@ -10,3 +10,9 @@ const deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
 ```
 
 Images are not licensed! Please keep that in mind.
+
+
+### Screenshot
+Preview:
+![alt text](https://github.com/AICDEV/game-of-thrones-coming-soon-page/blob/master/example.png)
+
