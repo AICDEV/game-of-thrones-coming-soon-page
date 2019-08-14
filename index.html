@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Release is coming - Coming Soon</title>
+    <meta name="author" content="aicdev">
+    <meta name="description" content="Winter is coming - coming soon counterdown page">
+    <style>
+        @font-face {
+            font-family: 'Game of Thrones';
+            src: url('./fonts/GameofThrones.eot');
+            src: url('./fonts/GameofThrones.eot?#iefix') format('embedded-opentype'),
+                url('./fonts/GameofThrones.woff') format('woff'),
+                url('./fonts/GameofThrones.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        html,
+        body {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            height: 100%;
+            width: 100%;
+            background-image: url('./demo.jpg');
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: 'Game of Thrones';
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .self_counter {
+            color: #ffffff;
+            font-size: 1.75em;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .countdown_value {
+            font-size: 1.25em;
+            text-align: center;
+        }
+
+        .countdown_info {
+            font-weight: bold;
+            font-size: 0.5em;
+            text-align: center;
+        }
+    </style>
+    <script src="./snowflake.min.js"></script>
+
+</head>
+
+<body>
+    <section>
+        <div class="self_counter">
+            <h2>Release is comming...</h2>
+            <div class="countdown">
+                <div class="countdown_element">
+                    <div class="countdown_value" id="days">
+                        30
+                    </div>
+                    <span class="countdown_info">
+                        <p>Days</p>
+                    </span>
+                </div>
+                <div class="countdown_element">
+                    <div class="countdown_value" id="hours">
+                        30
+                    </div>
+                    <span class="countdown_info">
+                        <p>Hours</p>
+                    </span>
+                </div>
+                <div class="countdown_element">
+                    <div class="countdown_value" id="minutes">
+                        30
+                    </div>
+                    <span class="countdown_info">
+                        <p>Minutes</p>
+                    </span>
+                </div>
+                <div class="countdown_element">
+                    <div class="countdown_value" id="seconds">
+                        30
+                    </div>
+                    <span class="countdown_info">
+                        <p>Seconds</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        /**
+         * full documentation for snowflakeJs is located here: https://github.com/AICDEV/snowflakeJS
+         * */
+        const snowflake = new SnowflakeJs(25, 250, 5000, 5, 25);
+        snowflake.init();
+    </script>
+    <script>
+        /**
+         * SET YOUR RELEASE OR ,WHATEVER YOU CALL IT, DATE e.g (new Date("2019/12/01")) // Sun Dec 01 2019 00:00:00 GMT+0100 
+         * */
+        const deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
+
+
+        function getTimeRemaining(deadline) {
+            const t = Date.parse(deadline) - Date.parse(new Date());
+            const seconds = Math.floor((t / 1000) % 60);
+            const minutes = Math.floor((t / 1000 / 60) % 60);
+            const hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(t / (1000 * 60 * 60 * 24));
+            return {
+                'total': t,
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': seconds
+            };
+        }
+
+        function countdown() {
+            const daysSpan = document.getElementById('days');
+            const hoursSpan = document.getElementById('hours');
+            const minutesSpan = document.getElementById('minutes');
+            const secondsSpan = document.getElementById('seconds');
+
+            function updateClock() {
+                const t = getTimeRemaining(deadline);
+
+                daysSpan.innerHTML = t.days;
+                hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+                minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+                if (t.total <= 0) {
+                    clearInterval(timeinterval);
+                }
+            }
+
+            updateClock();
+            const timeinterval = setInterval(updateClock, 1000);
+        }
+
+        countdown();
+    </script>
+</body>
+
+</html>
