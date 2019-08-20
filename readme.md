@@ -11,8 +11,6 @@ const deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
 
 Images are not licensed! Please keep that in mind.
 
-### Compatibility
-Unfortunately, there is some problem with snow animation in firefox and this crazy thing called Edge... i'm working on that. ;-) If you have any ideas, feel free to create a pull request.
 ### Live demo
 [Demo](https://aicdev.github.io/game-of-thrones-coming-soon-page/)
 
